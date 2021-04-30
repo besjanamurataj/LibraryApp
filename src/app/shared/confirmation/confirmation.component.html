@@ -1,0 +1,105 @@
+<p-dialog
+  header="Create a book "
+  [(visible)]="displayModal"
+  [style]="{ width: '35vw' }"
+>
+  <form [formGroup]="createForm">
+    <div class="p-grid p-fluid">
+      <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+          <input
+            type="text"
+            pInputText
+            placeholder="Title"
+            formControlName="title"
+            class="form-control"
+            required
+          />
+        </div>
+        <div
+          *ngIf="title.invalid && (title.dirty || title.touched)"
+          class="alert alert-danger"
+        >
+          <div *ngIf="title.errors.required">Title is required.</div>
+        </div>
+      </div>
+      <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+          <input
+            type="text"
+            pInputText
+            placeholder="Description"
+            formControlName="description"
+            required
+          />
+        </div>
+        <div
+          *ngIf="
+            description.invalid && (description.dirty || description.touched)
+          "
+          class="alert alert-danger"
+        >
+          <div *ngIf="description.errors.required">
+            Description is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+          <input
+            type="text"
+            pInputText
+            placeholder="Author"
+            formControlName="author"
+            required
+          />
+        </div>
+        <div
+          *ngIf="author.invalid && (author.dirty || author.touched)"
+          class="alert alert-danger"
+        >
+          <div *ngIf="description.errors.required">Author is required.</div>
+        </div>
+      </div>
+      <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup">
+          <input
+            type="text"
+            pInputText
+            placeholder="Category"
+            formControlName="category"
+            required
+          />
+        </div>
+        <div
+          *ngIf="category.invalid && (category.dirty || category.touched)"
+          class="alert alert-danger"
+        >
+          <div *ngIf="category.errors.required">Category is required.</div>
+        </div>
+      </div>
+
+      <div class="p-field p-col-12 p-md-4">
+        <p-calendar inputId="basic" formControlName="data"></p-calendar>
+      </div>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      style="width: auto"
+      (click)="closeModalDialog()"
+      (click)="createForm.reset()"
+    ></button>
+    <p-button
+      (click)="cretate()"
+      [disabled]="createForm.invalid"
+      class="float-right"
+      [routerLink]="['/']"
+      label="Save"
+    ></p-button>
+  </ng-template>
+</p-dialog>

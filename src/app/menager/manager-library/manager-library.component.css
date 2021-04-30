@@ -1,0 +1,11 @@
+.table-header {
+  text-align: right;
+  padding-right: 19px;
+}
+i.pi-plus-circle{
+  /* width: 24px; */
+  /* background-color: #248bc1; */
+  font-size: 32px;
+  color:#248bc1 ;
+  padding-left: 23px;
+}
