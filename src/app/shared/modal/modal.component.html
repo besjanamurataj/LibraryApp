@@ -1,7 +1,10 @@
 <p-dialog
   header="Create a book "
   [(visible)]="displayModal"
+  showEffect="fade"
   [style]="{ width: '35vw' }"
+  action="#{settings.reset}"
+  (onHide) ="createForm.reset()"
 >
   <form [formGroup]="createForm">
     <div class="p-grid p-fluid">
@@ -95,7 +98,7 @@
       (click)="createForm.reset()"
     ></button>
     <p-button
-      (click)="cretate()"
+      (click)="cretate(createForm.value)"
       [disabled]="createForm.invalid"
       class="float-right"
       [routerLink]="['/']"

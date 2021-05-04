@@ -1,8 +1,10 @@
-import { ConfirmationComponent } from './../../shared/confirmation/confirmation.component';
+import { ConfirmComponent } from './../confirm/confirm.component';
+
 import { LibraryService } from './../../services/library.service';
 import { Library } from './../../models/library';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
+import { ModalComponent } from 'src/app/shared/modal/modal.component';
 
 @Component({
   selector: 'app-manager-library',
@@ -10,58 +12,35 @@ import { Table } from 'primeng/table';
   styleUrls: ['./manager-library.component.css'],
 })
 export class ManagerLibraryComponent implements OnInit {
-  library: Library[];
+  library: any;
+  @Input() id: string;
   selectLibrary: Library[];
   statuses: any[];
   loading: boolean = false;
   @ViewChild('dt') table: Table;
-  @ViewChild(ConfirmationComponent) modal: ConfirmationComponent;
+  @ViewChild(ModalComponent) modal: ModalComponent;
+  @ViewChild(ConfirmComponent) confirm: ConfirmComponent;
   constructor(private libraryService: LibraryService) {}
 
   ngOnInit(): void {
-    this.libraryService.getLibrary().then((customers) => {
-      this.library = customers;
-      this.loading = false;
-      console.log(this.modal.displayModal);
-    });
+  this.getBook();
   }
-  // onActivityChange(event) {
-  //   const value = event.target.value;
-  //   if (value && value.trim().length) {
-  //     const activity = parseInt(value);
-
-  //     if (!isNaN(activity)) {
-  //       this.table.filter(activity, 'activity', 'gte');
-  //     }
-  //   }
-  // }
-
-  //onDateSelect(value) {
-   // this.table.filter(this.formatDate(value), 'date', 'equals');
-  //}
-
- // formatDate(date) {
-    // let month = date.getMonth() + 1;
-    // let day = date.getDate();
-
-    // if (month < 10) {
-    //   month = '0' + month;
-    // }
-
-    // if (day < 10) {
-    //   day = '0' + day;
-    // }
-
-    // return date.getFullYear() + '-' + month + '-' + day;
- // }
 
 
-  // onRepresentativeChange(event) {
-  //   this.table.filter(event.value, 'representative', 'in');
-  // }
+   getBook(){
+    this.libraryService.getBook().subscribe((data) => {
+    this.library = data;
+    console.log(data);
+    this.loading = false;
+  });
+}
 
-  deleteLibrary(item) {
-    let index = this.library.indexOf(item);
-    this.library.splice(index, 1);
-  }
+deleteBook(id){
+ const index = this.library.indexOf(this.id);
+ console.log(index);
+    this.library.splice(index,1);
+    console.log( this.library.splice(index,1));
+}
+
+
 }

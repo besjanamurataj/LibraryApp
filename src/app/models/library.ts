@@ -1,5 +1,5 @@
 export interface Library {
-  id:number;
+  id:string;
   title:string;
   author:string;
   category:string;

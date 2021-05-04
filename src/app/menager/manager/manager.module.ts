@@ -1,5 +1,5 @@
+import { ConfirmComponent } from './../confirm/confirm.component';
 import { SharedModule } from './../../shared/shared/shared.module';
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ManagerRoutingModule } from './manager-routing.module';
@@ -17,9 +17,10 @@ import {ContextMenuModule} from 'primeng/contextmenu';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import {InputTextModule} from 'primeng/inputtext';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
-  declarations: [ManagerLibraryComponent],
+  declarations: [ManagerLibraryComponent, ConfirmComponent],
   imports: [
     CommonModule,
     ManagerRoutingModule,
@@ -37,8 +38,7 @@ import {InputTextModule} from 'primeng/inputtext';
     HttpClientModule,
     FormsModule,
     SharedModule,
-
-
+    ConfirmDialogModule
 
   ]
 })

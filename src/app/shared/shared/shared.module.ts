@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastComponent } from './../toast/toast.component';
-import { ConfirmationComponent } from './../confirmation/confirmation.component';
+import {ModalComponent } from '../modal/modal.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 @NgModule({
-  declarations: [ConfirmationComponent,ToastComponent],
+  declarations: [ModalComponent,ToastComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -23,6 +23,6 @@ import { CalendarModule } from 'primeng/calendar';
     CalendarModule
 
   ],
-  exports:[ConfirmationComponent,ToastComponent],
+  exports:[ModalComponent,ToastComponent],
 })
 export class SharedModule { }

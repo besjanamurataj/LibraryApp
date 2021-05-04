@@ -1,3 +1,15 @@
-<p-menubar>
-  <a> Home</a>
-</p-menubar>
+<nav class="navbar navbar-dark bg-primary mt-2">
+ <div class="container-fluid">
+     <a class="navbar-brand" routerLink="home">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/reporting">Reporting</a>
+        </li>
+      </ul>
+    </div>
+   </div>
+</nav>

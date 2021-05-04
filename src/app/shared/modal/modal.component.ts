@@ -1,27 +1,30 @@
 import { Library } from './../../models/library';
-import { ToastComponent } from './../toast/toast.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { LibraryService } from '../../services/library.service';
+import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MessageService, PrimeNGConfig } from 'primeng/api';
+
 
 @Component({
-  selector: 'app-confirmation',
-  templateUrl: './confirmation.component.html',
-  styleUrls: ['./confirmation.component.css'],
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.css'],
 })
-export class ConfirmationComponent implements OnInit {
+export class ModalComponent implements OnInit {
   createForm: FormGroup;
   displayModal: boolean;
   date: Date;
-  // book:Library;
+  book: Library;
+  @Output() onAdd = new EventEmitter<Library>();
 
-  @ViewChild(ToastComponent) toast:ToastComponent;
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private bookService: LibraryService
+  ) {}
 
   ngOnInit(): void {
     this.createForm = this.formBuilder.group({
@@ -29,9 +32,8 @@ export class ConfirmationComponent implements OnInit {
       author: ['', [Validators.required]],
       description: ['', [Validators.required]],
       category: ['', [Validators.required]],
-      data:['',[Validators.required]]
+      data: ['', [Validators.required]],
     });
-      this.toast.test;
   }
   showModalDialog() {
     this.displayModal = true;
@@ -53,15 +55,22 @@ export class ConfirmationComponent implements OnInit {
   get category(): FormControl {
     return this.createForm.get('category') as FormControl;
   }
-  get data(): FormControl{
+  get data(): FormControl {
     return this.createForm.get('data') as FormControl;
   }
 
-  cretate() {
-   if(this.title.hasError('required')){
-     console.log(this.toast.showError());
-   }
-    console.log(this.createForm.value);
+  cretate(book: Library) {
+    if(this.book?.id){
+      console.log('update');
+      this.bookService.update(this.book.id,this.book);
+    }
+
+    this.bookService.create(book).subscribe(() => {
+      this.createForm.reset();
+      this.closeModalDialog() ;
+      this.onAdd.emit(book);
+      console.log(book);
+    });
   }
 
 
